@@ -1,52 +1,89 @@
 # Yusuf AI Assistant
 
-My personal AI assistant project: a Python AI backend first, with plans for a voice interface, Android app, and Windows desktop companion.
+A personal assistant project being built step by step: browser chat first, followed by voice input and spoken replies, then Windows and Android interfaces.
 
-## Current starter backend
+## What's included now
 
-- FastAPI HTTP API
-- `GET /` — app status
-- `GET /health` — health check
-- `POST /api/chat` — send a message to the AI service
-- API keys are read from a local `.env` file, not committed to GitHub
+- Responsive dark chat interface at `/`
+- FastAPI backend
+- `GET /health` — check whether the server is running
+- `GET /api/status` — see whether an API key is configured (the key itself is never returned)
+- `POST /api/chat` — send a message to the AI model
+- `/docs` — interactive API documentation
+- API key loaded from a local `.env` file, not from browser code
 
-## Run locally on Windows
+## Run on Windows with VS Code
 
-1. Install Python 3.11 or newer.
-2. Download or clone this repository.
-3. Open a terminal in the repository folder.
-4. Create and activate a virtual environment:
+### 1. Install the tools
 
-   ```powershell
-   python -m venv .venv
-   .venv\Scripts\Activate.ps1
-   ```
+Install Python 3.11 or newer and Visual Studio Code. In VS Code, install the Microsoft Python extension.
 
-5. Install dependencies:
+### 2. Download your repository
 
-   ```powershell
-   pip install -r requirements.txt
-   ```
+Open PowerShell or the VS Code terminal and run:
 
-6. Copy the example settings file and add your own API key to the local `.env` file:
+```powershell
+git clone https://github.com/yusufquadri786/jarvis-ai-assistant.git
+cd jarvis-ai-assistant
+code .
+```
 
-   ```powershell
-   Copy-Item .env.example .env
-   ```
+If the `code .` command is unavailable, open VS Code and choose **File → Open Folder**, then select the downloaded `jarvis-ai-assistant` folder.
 
-   Never put a real API key in source code or commit your `.env` file.
+### 3. Create a virtual environment
 
-7. Start the server:
+In the VS Code terminal (PowerShell), run:
 
-   ```powershell
-   uvicorn main:app --reload
-   ```
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-8. Open http://127.0.0.1:8000/docs to try the API, or http://127.0.0.1:8000/health to check the server.
+If PowerShell blocks activation, you can use the environment's Python directly instead:
+
+```powershell
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+### 4. Install dependencies
+
+```powershell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 5. Configure the API key
+
+Copy the template:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Open `.env` in VS Code and put your own API key after `OPENAI_API_KEY=`. Keep the key private. Do not paste it into chat messages, browser code, screenshots, or GitHub commits. The real `.env` file is ignored by Git.
+
+You need API access and billing may apply. If you don't have an API key yet, you can still open the interface and check the server, but AI replies will show a setup message.
+
+### 6. Start Yusuf AI Assistant
+
+```powershell
+python -m uvicorn main:app --reload
+```
+
+Keep the terminal open while using the app.
+
+### 7. Open the app
+
+- Chat interface: http://127.0.0.1:8000
+- Server check: http://127.0.0.1:8000/health
+- API settings status: http://127.0.0.1:8000/api/status
+- API testing page: http://127.0.0.1:8000/docs
+
+To stop the server, click the terminal and press **Ctrl+C**.
 
 ## Test the chat endpoint
 
-In the interactive docs at `/docs`, open `POST /api/chat` and try:
+You can test from the chat interface or from `/docs`, using `POST /api/chat`:
 
 ```json
 {
@@ -55,16 +92,18 @@ In the interactive docs at `/docs`, open `POST /api/chat` and try:
 }
 ```
 
-You need a valid API key and API access for the selected model. API usage may cost money.
+## Planned next steps
 
-## Next steps
-
-1. Test the backend locally.
-2. Add a polished chat interface.
+1. Run and test the local browser interface.
+2. Improve chat behavior and add conversation controls.
 3. Add voice input and text-to-speech.
-4. Connect an Android app and Windows desktop interface.
-5. Add settings and privacy controls.
+4. Add a Windows desktop companion.
+5. Build the Android interface.
+6. Add settings, accessibility, and privacy controls.
 
-## Development note
+## Security and deployment notes
 
-CORS is open for development convenience. Restrict allowed origins before deploying this API publicly. Do not expose the API key in a mobile app or browser client; keep it on the backend.
+- Never commit a real API key. Keep it in your local `.env` file or a hosting provider's secret manager.
+- Do not embed the API key in browser or mobile application code.
+- CORS is open for development convenience; restrict allowed origins before public deployment.
+- This project is a development starter, not a production-secured public service.
