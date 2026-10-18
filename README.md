@@ -81,6 +81,16 @@ Keep the terminal open while using the app.
 
 To stop the server, click the terminal and press **Ctrl+C**.
 
+## Run the basic automated tests
+
+After installing dependencies, run:
+
+\`\`\`powershell
+python -m pytest
+\`\`\`
+
+The tests check that the homepage loads, the health endpoint responds, status does not reveal the API key, and chat reports a clear setup error when no key is configured.
+
 ## Test the chat endpoint
 
 You can test from the chat interface or from `/docs`, using `POST /api/chat`:
