@@ -74,10 +74,11 @@ def chat(request: ChatRequest):
         )
 
     model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+    requested_language = request.language or "auto"
     language_instruction = (
         "Reply in the same language as the user unless they ask for another language."
-        if request.language == "auto"
-        else f"Reply in {request.language}."
+        if requested_language == "auto"
+        else f"Reply in {requested_language}."
     )
 
     try:
@@ -93,7 +94,7 @@ def chat(request: ChatRequest):
             input=request.message,
         )
         reply = response.output_text.strip() or "I couldn't produce a reply. Please try again."
-        return ChatResponse(reply=reply, language=request.language or "auto")
+        return ChatResponse(reply=reply, language=requested_language)
     except Exception as exc:
         # Keep secret values and provider details out of the response sent to the browser.
         print(f"AI request failed: {type(exc).__name__}")
