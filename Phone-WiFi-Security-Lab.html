@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JARVIS Phone & Wi-Fi Security Lab</title>
+<style>
+:root{--bg:#080d12;--panel:#111b24;--line:#2a3b49;--green:#8cffb0;--cyan:#65e8ff;--text:#eaf2f7;--muted:#9aabba;--amber:#ffd17b}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#15392c,transparent 34%),var(--bg);color:var(--text);font:14px/1.55 "Segoe UI",Arial,sans-serif}header{padding:18px 5vw;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}.brand{font-weight:900;letter-spacing:1.6px}.led{color:var(--green);font-size:11px;letter-spacing:1px}main{max-width:1100px;margin:auto;padding:30px 20px 50px}.eyebrow{color:var(--green);letter-spacing:3px;font-size:11px;font-weight:bold}.hero{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.hero h1{font-size:clamp(28px,4vw,43px);margin:7px 0}.hero p{color:var(--muted);max-width:730px;margin:0}.badge{border:1px solid #3c6248;color:var(--green);border-radius:8px;padding:10px;white-space:nowrap;font-size:11px}.notice{padding:13px 15px;background:#241d11;border:1px solid #64502c;color:#f4dca9;border-radius:9px;margin:18px 0;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.card{background:linear-gradient(145deg,#121e29,#0d141b);border:1px solid var(--line);border-radius:12px;padding:20px}.card h2{font-size:17px;margin:0 0 6px}.desc{color:var(--muted);font-size:12px;margin:0 0 15px}.check{display:block;padding:8px 0;color:#d4e0e8;font-size:13px}.check input{accent-color:var(--green);margin-right:9px}.btn{background:var(--green);color:#07120b;border:0;border-radius:7px;padding:10px 13px;font-weight:800;cursor:pointer;margin:8px 6px 0 0}.btn.alt{background:#142731;color:var(--cyan);border:1px solid #2b5260}.out{background:#070c11;border:1px solid #253745;border-radius:7px;padding:12px;margin-top:12px;color:var(--green);white-space:pre-wrap;font:12px/1.7 Consolas,monospace;overflow-wrap:anywhere}.links a{display:inline-block;margin:5px 7px 5px 0;padding:9px 11px;border:1px solid #31515e;border-radius:7px;color:var(--cyan);text-decoration:none;font-size:12px}.links a:hover{border-color:var(--green)}.small{font-size:11px;color:var(--muted);margin-top:10px}.foot{text-align:center;color:#708495;font-size:11px;margin-top:25px}@media(max-width:720px){.grid{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}header{padding:16px}}
+</style></head><body>
+<header><div class="brand">JARVIS <span style="color:var(--green)">// PHONE + WI-FI SECURITY</span></div><div class="led">● DEFENSIVE LAB</div></header>
+<main><div class="hero"><div><div class="eyebrow">CYBERSHIELD • SECURITY REVIEW</div><h1>Phone & Wi-Fi Security Lab</h1><p>A practical checklist to secure your own phone and home router, plus trusted training resources for authorized security testing.</p></div><div class="badge">LOCAL CHECKLIST • NO SCANNING</div></div>
+<div class="notice"><strong>Important:</strong> This dashboard does not break into phones, reveal Wi-Fi passwords, capture traffic, or attack nearby networks. Only test devices and networks you own or have clear permission to assess.</div>
+<div class="grid">
+<section class="card"><h2>01 / Phone Security Review</h2><p class="desc">Check these items on your own Android or iPhone.</p>
+<label class="check"><input type="checkbox">Install system and security updates</label><label class="check"><input type="checkbox">Use a strong screen lock and biometrics if appropriate</label><label class="check"><input type="checkbox">Enable device-finding and recovery features</label><label class="check"><input type="checkbox">Review app permissions (camera, mic, location, contacts)</label><label class="check"><input type="checkbox">Remove apps you no longer use; install from official stores</label><label class="check"><input type="checkbox">Enable multi-factor authentication on important accounts</label><label class="check"><input type="checkbox">Back up important data securely</label>
+<button class="btn" onclick="progress(0,'phoneOut')">Check progress</button><button class="btn alt" onclick="exportChecks(0,'Phone')">Export checklist</button><div class="out" id="phoneOut">0 checks completed.</div></section>
+<section class="card"><h2>02 / Home Wi-Fi Audit</h2><p class="desc">Review router settings through your router's official admin interface.</p>
+<label class="check"><input type="checkbox">Change the router's default administrator password</label><label class="check"><input type="checkbox">Use WPA2-AES or WPA3 security; avoid WEP and open Wi-Fi</label><label class="check"><input type="checkbox">Set a unique Wi-Fi passphrase</label><label class="check"><input type="checkbox">Update router firmware from the manufacturer's official source</label><label class="check"><input type="checkbox">Disable WPS if you do not need it</label><label class="check"><input type="checkbox">Review connected-device list for unfamiliar devices</label><label class="check"><input type="checkbox">Use a guest network for visitors and smart-home devices</label><label class="check"><input type="checkbox">Keep router administration off the public internet</label>
+<button class="btn" onclick="progress(1,'wifiOut')">Check progress</button><button class="btn alt" onclick="exportChecks(1,'WiFi')">Export checklist</button><div class="out" id="wifiOut">0 checks completed.</div><p class="small">This page cannot detect or identify devices on your network; check your router directly.</p></section>
+<section class="card"><h2>03 / Safe Practice Labs</h2><p class="desc">Learn penetration-testing concepts in guided environments designed for training.</p><div class="links"><a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe guided labs ↗</a><a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">Web Security Academy ↗</a><a href="https://www.kali.org/docs/" target="_blank" rel="noopener noreferrer">Kali Linux documentation ↗</a></div><div class="out">Recommended learning path:
+1. Linux terminal basics
+2. IP addresses, DNS, ports and routing
+3. Wi-Fi encryption and router hardening
+4. Android permissions and app security
+5. Guided labs with explicit authorization
+6. Write a report describing risks and fixes</div></section>
+<section class="card"><h2>04 / If You Suspect a Compromise</h2><p class="desc">Start with safe recovery steps rather than trying to retaliate or break into another device.</p><div class="out">PHONE
+• Update the OS and remove unfamiliar apps.
+• Review account sign-in sessions and revoke unknown sessions.
+• Change important account passwords from a trusted device.
+• Enable multi-factor authentication.
+• Contact the device maker or a trusted technician if concerns continue.
+
+WI-FI
+• Change router admin and Wi-Fi passwords.
+• Install official firmware updates.
+• Remove unknown devices in router settings.
+• Contact your ISP/router maker if you cannot secure it.</div></section>
+</div><div class="foot">JARVIS CYBERSHIELD • Defensive education only • No network traffic is collected</div></main>
+<script>
+function cards(i){return [...document.querySelectorAll('.card')][i].querySelectorAll('input[type=checkbox]')}
+function progress(i,id){const a=[...cards(i)];const n=a.filter(x=>x.checked).length;document.getElementById(id).textContent='Progress: '+n+' / '+a.length+' completed ('+Math.round(n/a.length*100)+'%).'}
+function exportChecks(i,label){const a=[...cards(i)];const txt='JARVIS CYBERSHIELD — '+label+' SECURITY REVIEW\n\n'+a.map(x=>(x.checked?'[x] ':'[ ] ')+x.parentElement.textContent.trim()).join('\n')+'\n\nDefensive checklist only; no scanning was performed.\n';const u=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));const el=document.createElement('a');el.href=u;el.download='jarvis-'+label.toLowerCase()+'-security-checklist.txt';el.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
+</script></body></html>
