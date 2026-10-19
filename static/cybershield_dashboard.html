@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JARVIS // CyberShield Console</title>
+<style>
+:root{color-scheme:dark;--bg:#07111f;--panel:#0d1b2c;--panel2:#10243a;--line:#1c3a53;--text:#e8f4ff;--muted:#8da8c2;--cyan:#4de3ff;--green:#55f2b1;--amber:#ffca6a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#103552 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif}
+header{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:#07111fe8;position:sticky;top:0;backdrop-filter:blur(12px);z-index:3}
+.brand{display:flex;gap:12px;align-items:center;font-weight:800;letter-spacing:2px}.logo{width:40px;height:40px;border:1px solid var(--cyan);border-radius:12px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 20px #4de3ff22;font-size:20px}
+.status{color:var(--green);font-size:12px;letter-spacing:1px}.status:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:8px;box-shadow:0 0 10px var(--green)}
+main{max-width:1250px;margin:auto;padding:34px 24px 50px}.eyebrow{color:var(--cyan);letter-spacing:3px;font-size:11px;font-weight:800}.hero{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:28px}.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.08;margin:8px 0}.hero p{color:var(--muted);max-width:650px;margin:0}.pill{border:1px solid #276079;background:#0b2436;border-radius:30px;padding:10px 14px;color:var(--cyan);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:linear-gradient(145deg,#10243a,#0a1727);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 12px 30px #0002}.metric-label{color:var(--muted);font-size:12px}.metric{font-size:30px;font-weight:800;margin:10px 0 4px}.sub{font-size:12px;color:var(--green)}.section-title{margin:28px 0 12px;font-size:17px}.lower{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}.panel-head h2{font-size:16px;margin:0}.tag{font-size:10px;color:var(--cyan);border:1px solid #24536b;padding:4px 8px;border-radius:20px;letter-spacing:1px}
+.device{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #1a3248}.device:last-child{border:0}.device-icon{width:38px;height:38px;border-radius:11px;background:#112f47;display:grid;place-items:center;font-size:18px}.device-info{flex:1}.device-info strong{display:block}.device-info small{color:var(--muted)}.badge{font-size:11px;border-radius:20px;padding:4px 9px;background:#103629;color:var(--green)}.badge.warn{background:#3b2c15;color:var(--amber)}
+.check{display:flex;gap:11px;align-items:flex-start;margin:15px 0;color:#c6d9eb}.check input{accent-color:var(--cyan);margin-top:5px;width:16px;height:16px}.check span{flex:1}.check small{display:block;color:var(--muted);margin-top:3px}.button{border:0;border-radius:10px;background:linear-gradient(90deg,#25bde4,#4de3ff);color:#03111d;padding:11px 15px;font-weight:800;cursor:pointer}.button.secondary{background:#102a40;color:var(--cyan);border:1px solid #24536b}.button:hover{filter:brightness(1.08)}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.notice{margin-top:18px;border:1px solid #4a3c20;background:#211c12;color:#f2d69d;border-radius:12px;padding:13px 15px;font-size:12px}.activity{color:var(--muted);font-size:12px}.activity p{padding:9px 0;border-bottom:1px solid #1a3248;margin:0}.activity b{color:var(--green);font-weight:600}.footer{text-align:center;color:#69849f;font-size:11px;margin-top:28px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}}
+@media(max-width:480px){header{padding:0 16px}.grid{grid-template-columns:1fr 1fr}.card{padding:14px}.metric{font-size:25px}main{padding:24px 14px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">✦</div><div>JARVIS <span style="color:var(--cyan)">/ CYBERSHIELD</span></div></div><div class="status">DEFENSIVE MODE ACTIVE</div></header>
+<main>
+  <div class="hero"><div><div class="eyebrow">PERSONAL SECURITY WORKSPACE</div><h1>Security command center.</h1><p>A polished learning dashboard for tracking your own devices and practicing safe, authorized cybersecurity. This demo does not scan, access, or hack devices.</p></div><div class="pill">● LOCAL DEMO • NO NETWORK SCANS</div></div>
+  <div class="grid">
+    <div class="card"><div class="metric-label">REGISTERED DEVICES</div><div class="metric">03</div><div class="sub">Manually listed examples</div></div>
+    <div class="card"><div class="metric-label">CHECKLIST COMPLETE</div><div class="metric" id="score">02 / 06</div><div class="sub">Update as you review</div></div>
+    <div class="card"><div class="metric-label">OPEN REMINDERS</div><div class="metric" id="reminders">04</div><div class="sub" style="color:var(--amber)">Review recommended</div></div>
+    <div class="card"><div class="metric-label">LAST REVIEW</div><div class="metric" style="font-size:23px">NOT RUN</div><div class="sub">No checks performed automatically</div></div>
+  </div>
+  <h2 class="section-title">Your security workspace</h2>
+  <div class="lower">
+    <section class="card"><div class="panel-head"><h2>Device inventory</h2><span class="tag">SAMPLE DATA</span></div>
+      <div class="device"><div class="device-icon">💻</div><div class="device-info"><strong>My laptop</strong><small>Your own Windows computer • example entry</small></div><span class="badge warn">Review</span></div>
+      <div class="device"><div class="device-icon">📱</div><div class="device-info"><strong>My phone</strong><small>Personal device • example entry</small></div><span class="badge">Listed</span></div>
+      <div class="device"><div class="device-icon">📡</div><div class="device-info"><strong>Home router</strong><small>Only manage with owner permission</small></div><span class="badge warn">Review</span></div>
+      <div class="actions"><button class="button secondary" onclick="addDevice()">＋ Add my device</button><button class="button secondary" onclick="downloadReport()">Export checklist</button></div>
+      <div class="notice">Only add devices you own or are explicitly authorized to manage. This inventory stays in this page and is not uploaded.</div>
+    </section>
+    <section class="card"><div class="panel-head"><h2>Defensive security checklist</h2><span class="tag">LOCAL</span></div>
+      <label class="check"><input type="checkbox" class="task"><span><b>Enable automatic updates</b><small>Keep the operating system and apps patched.</small></span></label>
+      <label class="check"><input type="checkbox" class="task"><span><b>Use unique passphrases</b><small>Consider a reputable password manager.</small></span></label>
+      <label class="check"><input type="checkbox" class="task"><span><b>Turn on multi-factor authentication</b><small>Start with email and important accounts.</small></span></label>
+      <label class="check"><input type="checkbox" class="task"><span><b>Review app permissions</b><small>Remove access an app does not need.</small></span></label>
+      <label class="check"><input type="checkbox" class="task"><span><b>Back up important files</b><small>Keep a separate backup and test it.</small></span></label>
+      <label class="check"><input type="checkbox" class="task"><span><b>Check router admin settings</b><small>Only on your own network, with permission.</small></span></label>
+      <div class="actions"><button class="button" onclick="updateScore()">Update progress</button><button class="button secondary" onclick="clearChecks()">Reset</button></div>
+    </section>
+  </div>
+  <h2 class="section-title">Activity feed</h2>
+  <section class="card activity" id="feed"><p><b>READY</b> — Dashboard loaded in demo mode.</p><p><b>PRIVACY</b> — No password, device data, or network information is collected.</p><p><b>LEARNING</b> — Next step: practice in a legal cybersecurity training lab.</p></section>
+  <div class="footer">JARVIS / CYBERSHIELD • EDUCATION & DEFENSE ONLY • DEMO INTERFACE</div>
+</main>
+<script>
+const tasks=[...document.querySelectorAll('.task')];
+function updateScore(){const n=tasks.filter(t=>t.checked).length;document.getElementById('score').textContent=String(n).padStart(2,'0')+' / 06';document.getElementById('reminders').textContent=String(6-n).padStart(2,'0');log('CHECKLIST','Progress updated: '+n+' of 6 complete.');}
+function clearChecks(){tasks.forEach(t=>t.checked=false);updateScore();log('RESET','Checklist reset locally.');}
+function log(kind,msg){const p=document.createElement('p');const b=document.createElement('b');b.textContent=kind+' ';p.append(b,document.createTextNode('— '+msg));document.getElementById('feed').prepend(p);}
+function addDevice(){const name=prompt('Enter a nickname for a device you own (example: Study laptop):');if(!name||!name.trim())return;const row=document.createElement('div');row.className='device';const icon=document.createElement('div');icon.className='device-icon';icon.textContent='🖥️';const info=document.createElement('div');info.className='device-info';const strong=document.createElement('strong');strong.textContent=name.trim();const small=document.createElement('small');small.textContent='Added manually • local demo only';info.append(strong,small);const badge=document.createElement('span');badge.className='badge';badge.textContent='Listed';row.append(icon,info,badge);const list=document.querySelector('.lower .card');const firstDevice=list.querySelector('.device');list.insertBefore(row,firstDevice);log('INVENTORY','Added a manually listed device.');}
+function downloadReport(){const n=tasks.filter(t=>t.checked).length;const text='JARVIS / CYBERSHIELD SECURITY CHECKLIST\nCompleted: '+n+' / 6\n\n'+tasks.map(t=>(t.checked?'[x] ':'[ ] ')+t.parentElement.querySelector('b').textContent).join('\n')+'\n\nEducational checklist only. No device scans were performed.\n';const blob=new Blob([text],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cybershield-checklist.txt';a.click();URL.revokeObjectURL(a.href);log('EXPORT','Saved a checklist text report.');}
+</script>
+</body>
+</html>
