@@ -8,6 +8,7 @@ A personal assistant project being built step by step: browser chat first, follo
 - FastAPI backend
 - `GET /health` — check whether the server is running
 - `GET /api/status` — see whether an API key is configured (the key itself is never returned)
+- `GET /api/integrations` — show the planned integration catalogue and approval expectations; this does **not** mean accounts are connected
 - `POST /api/chat` — send a message to the AI model
 - `/docs` — interactive API documentation
 - API key loaded from a local `.env` file, not from browser code
@@ -19,8 +20,6 @@ A personal assistant project being built step by step: browser chat first, follo
 Install Python 3.11 or newer and Visual Studio Code. In VS Code, install the Microsoft Python extension.
 
 ### 2. Download your repository
-
-Open PowerShell or the VS Code terminal and run:
 
 ```powershell
 git clone https://github.com/yusufquadri786/jarvis-ai-assistant.git
@@ -77,19 +76,20 @@ Keep the terminal open while using the app.
 - Chat interface: http://127.0.0.1:8000
 - Server check: http://127.0.0.1:8000/health
 - API settings status: http://127.0.0.1:8000/api/status
+- Planned integrations: http://127.0.0.1:8000/api/integrations
 - API testing page: http://127.0.0.1:8000/docs
 
 To stop the server, click the terminal and press **Ctrl+C**.
 
-## Run the basic automated tests
+## Run the automated tests
 
 After installing dependencies, run:
 
-\`\`\`powershell
+```powershell
 python -m pytest
-\`\`\`
+```
 
-The tests check that the homepage loads, the health endpoint responds, status does not reveal the API key, and chat reports a clear setup error when no key is configured.
+The tests check the homepage, health endpoint, API-key secrecy, missing-key behavior, integration catalogue, and confirmation policy. A successful test run must be performed locally; a repository change alone does not prove the app runs.
 
 ## Test the chat endpoint
 
@@ -102,18 +102,15 @@ You can test from the chat interface or from `/docs`, using `POST /api/chat`:
 }
 ```
 
-## Planned next steps
+## Cross-device development plan
 
-1. Run and test the local browser interface.
-2. Improve chat behavior and add conversation controls.
-3. Add voice input and text-to-speech.
-4. Add a Windows desktop companion.
-5. Build the Android interface.
-6. Add settings, accessibility, and privacy controls.
+See [`docs/DEVICE_INTEGRATION_ROADMAP.md`](docs/DEVICE_INTEGRATION_ROADMAP.md) for the phased plan for Windows and Android clients, voice, app integrations, and sensitive-action approvals.
 
 ## Security and deployment notes
 
 - Never commit a real API key. Keep it in your local `.env` file or a hosting provider's secret manager.
 - Do not embed the API key in browser or mobile application code.
+- The integration catalogue is planning metadata; no external app accounts are connected by it.
+- Ask for confirmation before sending messages, publishing posts, commenting, deleting files, purchases, or other externally visible/destructive actions.
 - CORS is open for development convenience; restrict allowed origins before public deployment.
 - This project is a development starter, not a production-secured public service.
