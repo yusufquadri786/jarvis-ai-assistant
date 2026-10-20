@@ -21,6 +21,8 @@ Install Python 3.11 or newer and Visual Studio Code. In VS Code, install the Mic
 
 ### 2. Download your repository
 
+Open PowerShell or the VS Code terminal and run:
+
 ```powershell
 git clone https://github.com/yusufquadri786/jarvis-ai-assistant.git
 cd jarvis-ai-assistant
