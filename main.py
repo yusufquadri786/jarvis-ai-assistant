@@ -10,6 +10,8 @@ from fastapi.responses import FileResponse
 from openai import OpenAI
 from pydantic import BaseModel, Field
 
+from integrations import planned_integrations
+
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent
 WEB_APP = BASE_DIR / "static" / "index.html"
@@ -61,6 +63,15 @@ def status():
         "status": "ready" if os.getenv("OPENAI_API_KEY") else "needs_api_key",
         "model": os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
         "api_key_configured": bool(os.getenv("OPENAI_API_KEY")),
+    }
+
+
+@app.get("/api/integrations")
+def integrations_status():
+    """List integration plans without implying that accounts are connected."""
+    return {
+        "note": "Catalogue only: no external app accounts are connected by this endpoint.",
+        "integrations": [item.model_dump() for item in planned_integrations()],
     }
 
 
