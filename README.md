@@ -117,3 +117,8 @@ You can test from the chat interface or from `/docs`, using `POST /api/chat`:
 - Do not embed the API key in browser or mobile application code.
 - CORS is open for development convenience; restrict allowed origins before public deployment.
 - This project is a development starter, not a production-secured public service.
+
+
+## Extra project: Mausam Saathi
+
+A separate bilingual (English/Hindi) daily weather companion MVP is available at [`projects/mausam-saathi/`](projects/mausam-saathi/). Open `projects/mausam-saathi/index.html` in a browser to try it. It uses Open-Meteo for city search and forecasts and does not require an API key. See the [project guide](projects/mausam-saathi/PROJECT-GUIDE.md) for details. This is an informational forecast, not an official emergency-alert service.
