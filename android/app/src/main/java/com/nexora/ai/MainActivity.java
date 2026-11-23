@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.SafeBrowsingResponse;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -22,7 +20,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
     private static final String PREFS = "nexora_settings";
     private static final String SERVER_URL = "server_url";
-    private LinearLayout root;
     private WebView webView;
     private EditText serverInput;
 
@@ -32,15 +29,12 @@ public class MainActivity extends Activity {
         String configured = BuildConfig.BACKEND_URL.trim();
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         String saved = prefs.getString(SERVER_URL, configured);
-        if (saved != null && !saved.trim().isEmpty()) {
-            openAssistant(saved.trim());
-        } else {
-            showServerSetup();
-        }
+        if (saved != null && !saved.trim().isEmpty()) openAssistant(saved.trim());
+        else showServerSetup();
     }
 
     private void showServerSetup() {
-        root = new LinearLayout(this);
+        LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
         root.setPadding(dp(24), dp(36), dp(24), dp(24));
         root.setBackgroundColor(Color.rgb(7, 14, 27));
@@ -65,7 +59,7 @@ public class MainActivity extends Activity {
         serverInput.setHintTextColor(Color.GRAY);
         serverInput.setHint("https://your-service.example.com");
         serverInput.setText(getSharedPreferences(PREFS, MODE_PRIVATE).getString(SERVER_URL, BuildConfig.BACKEND_URL));
-        serverInput.setInputType( Uri.parse("https://example.com").getScheme() != null ?  android.text.InputType.TYPE_TEXT_VARIATION_URI : android.text.InputType.TYPE_CLASS_TEXT);
+        serverInput.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_URI);
         LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         inputParams.topMargin = dp(24);
@@ -102,8 +96,7 @@ public class MainActivity extends Activity {
         try {
             Uri uri = Uri.parse(value);
             return "https".equalsIgnoreCase(uri.getScheme())
-                    && uri.getHost() != null
-                    && uri.getUserInfo() == null;
+                    && uri.getHost() != null && uri.getUserInfo() == null;
         } catch (Exception ignored) {
             return false;
         }
@@ -115,6 +108,7 @@ public class MainActivity extends Activity {
             Toast.makeText(this, "A valid HTTPS server URL is required.", Toast.LENGTH_LONG).show();
             return;
         }
+        Uri server = Uri.parse(url);
         webView = new WebView(this);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
@@ -129,7 +123,7 @@ public class MainActivity extends Activity {
                 Uri target = request.getUrl();
                 return !("https".equalsIgnoreCase(target.getScheme())
                         && target.getHost() != null
-                        && target.getHost().equalsIgnoreCase(Uri.parse(url).getHost()));
+                        && target.getHost().equalsIgnoreCase(server.getHost()));
             }
         });
         setContentView(webView);
@@ -142,11 +136,8 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
-        } else {
-            super.onBackPressed();
-        }
+        if (webView != null && webView.canGoBack()) webView.goBack();
+        else super.onBackPressed();
     }
 
     @Override
