@@ -117,3 +117,30 @@ You can test from the chat interface or from `/docs`, using `POST /api/chat`:
 - Do not embed the API key in browser or mobile application code.
 - CORS is open for development convenience; restrict allowed origins before public deployment.
 - This project is a development starter, not a production-secured public service.
+
+
+## NEXORA AI Android app (version 1.1)
+
+The Android project is in `android/`. It is a secure HTTPS WebView shell around the existing FastAPI web app. The AI provider key stays on the backend and is never packaged in the APK.
+
+### Deploy the backend
+
+1. Create a new Web Service in Render and connect this repository/branch.
+2. Use the included `render.yaml` blueprint (or set the same build/start commands).
+3. Add the private environment variables in Render:
+   - `OPENAI_API_KEY`: your provider key (keep it private).
+   - `NEXORA_ACCESS_CODE`: create a long, unique access code and share it only with intended app users.
+   - `OPENAI_MODEL`: optional; defaults to `gpt-4.1-mini`.
+4. Wait for the service to deploy. Check `https://YOUR-SERVICE/health`; it should return status `ok`.
+
+Do not put either secret in GitHub source files or in the Android app.
+
+### Build the APK with GitHub Actions
+
+1. Open **Settings → Secrets and variables → Actions** in GitHub.
+2. Add repository secret `NEXORA_BACKEND_URL` with the HTTPS Render service URL (for example, `https://your-service.onrender.com`).
+3. Open **Actions → Build NEXORA AI Android APK** and run the workflow, or push a change under `android/`.
+4. When the run succeeds, open the run's **Artifacts** section and download `NEXORA-AI-1.1-debug`. Extract the ZIP to get `app-debug.apk`.
+5. Transfer the APK to the Android phone and install it. If no backend URL was configured at build time, the app asks for the HTTPS server address on first launch.
+
+The workflow creates a debug APK for testing. A Play Store release needs a separately signed release build and Play App Signing setup.
