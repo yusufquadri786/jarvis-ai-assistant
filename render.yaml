@@ -11,5 +11,7 @@ services:
         value: 3.11.9
       - key: OPENAI_API_KEY
         sync: false
+      - key: NEXORA_ACCESS_CODE
+        sync: false
       - key: OPENAI_MODEL
         value: gpt-4.1-mini
